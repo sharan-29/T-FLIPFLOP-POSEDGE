@@ -40,28 +40,33 @@ From the above characteristic table, we can directly write the next state equati
 
 **PROGRAM**
 ```
-module EX9(t,clk,rst,q);
-input t,clk,rst;
-output reg q;
-
-always @(posedge clk or posedge rst)
+module EX9( input clk, rst_n, input t,
+output reg q,
+output q_bar
+);
+always@(posedge clk) 
 begin 
-	if(rst)
-		q<=0;// Reset the flip-flop
-	else if (t==0)
-	q<=q;
-	else
-		q<=~q;
-	end
+if(!rst_n)
+ q<=0;
+ else
+ if(t)
+ q<=~q;
+ else
+ q<=q;
+ end
+ 
+assign q_bar = ~q;
 endmodule
 ```
 /* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:212224230260
 */
 
 **RTL LOGIC FOR FLIPFLOPS**
-![image](https://github.com/user-attachments/assets/bf4fcd7e-a500-4b97-a036-c0ba7c50c039)
+![image](https://github.com/user-attachments/assets/27ee1741-4d58-4a35-931b-051a8cb2d6ac)
+
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
+![image](https://github.com/user-attachments/assets/03d6091d-44b5-4f24-8c41-22d54910f6ea)
 
 **RESULTS**
 
